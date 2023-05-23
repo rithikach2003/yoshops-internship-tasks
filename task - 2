@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Payroll ATS</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: yellow;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            background-color: pink;
+            border: #070101;
+        }
+        
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 5px solid #070101;
+            background-color: powder blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Payroll Management system</h1>
+    
+    <div id="output"></div>
+
+    <script>
+        // JavaScript code
+        // Define the employee data
+        function getEmployeeData() {
+    const employeeData = [];
+
+    const numEmployees = parseInt(prompt("Enter the number of employees:"));
+
+    for (let i = 0; i < numEmployees; i++) {
+        const name = prompt(`Enter the name of employee ${i + 1}:`);
+        const branch = prompt(`Enter the branch of employee ${i + 1}:`);
+        const fees = prompt(`Enter the fees for employee ${i + 1}:`);
+        const chennaiAmount = prompt(`Enter the Chennai amount for employee ${i + 1}:`);
+        const aurangabadAmount = prompt(`Enter the Aurangabad amount for employee ${i + 1}:`);
+
+        const employee = {
+            "Name": name,
+            "Branch": branch,
+            "Fees": fees,
+            "Chennai": chennaiAmount,
+            "Aurangabad": aurangabadAmount
+        };
+
+        employeeData.push(employee);
+    }
+
+    return employeeData;
+}
+
+// Retrieve the employee data
+const employees = getEmployeeData();
+
+        // Function to generate pay slips (monthly one-time)
+        function generatePaySlips() {
+            let paySlips = "";
+            
+            for (const employee of employees) {
+                const name = employee["Name"];
+                const branch = employee["Branch"];
+                const fees = employee["Fees"];
+                
+                const paySlip = `Pay slip for ${name} (${branch}): ${fees}<br>`;
+                paySlips += paySlip;
+            }
+            
+            return paySlips;
+        }
+
+        // Function to generate cash flow report
+        function generateCashFlowReport() {
+            let chennaiTotal = 0;
+            let aurangabadTotal = 0;
+            
+            for (const employee of employees) {
+                const branch = employee["Branch"];
+                const chennaiAmount = parseFloat(employee["Chennai"].substring(2));
+                const aurangabadAmount = parseFloat(employee["Aurangabad"].substring(2));
+                
+                if (branch === "Chennai") {
+                    chennaiTotal += chennaiAmount;
+                } else if (branch === "Aurangabad") {
+                    aurangabadTotal += aurangabadAmount;
+                }
+            }
+            
+            const cashFlowChennai = `Cash flow report - Chennai Head Office: ₹ ${chennaiTotal}<br>`;
+            const cashFlowAurangabad = `Cash flow report - Franchise (Aurangabad): ₹ ${aurangabadTotal}<br>`;
+            
+            return cashFlowChennai + cashFlowAurangabad;
+        }
+
+        // Function to generate balance sheet report
+        function generateBalanceSheetReport() {
+            let chennaiTotal = 0;
+            let aurangabadTotal = 0;
+            
+            for (const employee of employees) {
+                const branch = employee["Branch"];
+                const chennaiAmount = parseFloat(employee["Chennai"].substring(2));
+                const aurangabadAmount = parseFloat(employee["Aurangabad"].substring(2));
+                
+                if (branch === "Chennai") {
+                    chennaiTotal += chennaiAmount;
+                } else if (branch === "Aurangabad") {
+                    aurangabadTotal += aurangabadAmount;
+                }
+            }
+            
+            const balanceSheetChennai = `Balance sheet report - Chennai: ₹ ${chennaiTotal}<br>`;
+            const balanceSheetAurangabad = `Balance sheet report - Aurangabad: ₹ ${aurangabadTotal}<br>`;
+            
+            return balanceSheetChennai + balanceSheetAurangabad;
+        }
+
+        // Function to generate stakeholder distribution report
+        function generateStakeholderDistributionReport() {
+            let totalProfit = 0;
+            
+            for (const employee of employees) {
+                const chennaiAmount = parseFloat(employee["Chennai"].substring(2));
+                const aurangabadAmount = parseFloat(employee["Aurangabad"].substring(2));
+                totalProfit += chennaiAmount + aurangabadAmount;
+            }
+            
+            const distributionReport = `Stakeholder distribution report: Profit ₹ ${totalProfit}<br>`;
+            
+            return distributionReport;
+        }
+
+        // Generate pay slips
+        const paySlips = generatePaySlips();
+
+        // Generate cash flow report
+        const cashFlowReport = generateCashFlowReport();
+
+        // Generate balance sheet report
+        const balanceSheetReport = generateBalanceSheetReport();
+
+        // Generate stakeholder distribution report
+        const stakeholderDistributionReport = generateStakeholderDistributionReport();
+
+        // Display the reports
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = paySlips + cashFlowReport + balanceSheetReport + stakeholderDistributionReport;
+    </script>
+</body>
+</html>
