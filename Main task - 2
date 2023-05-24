@@ -5,6 +5,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color:#C0C0C0;
     }
 
     .container {
