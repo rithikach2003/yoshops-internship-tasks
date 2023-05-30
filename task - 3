@@ -1,76 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Product Review</title>
-    <style>
-        /* CSS styles for the form */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color:gold;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        form {
-            max-width: 500px;
-            margin:0 auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid black;
-        }
-
-        input[type="submit"] {
-            background-color: green;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        #response {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Submit Product Rating and Review</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Product Review</h1>
-    <form onsubmit="submitForm(event)">
-        <label for="product_link">Product Link:</label>
-        <input type="text" id="product_link" required>
+    <h1>Submit Product Rating and Review</h1>
+    <form id="reviewForm" action="">
+        <label for="productLink">Product Link:</label>
+        <input type="text" id="productLink" name="productLink" required><br><br>
+        
         <label for="rating">Rating:</label>
-        <input type="number" id="rating" min="1" max="5" required>
-        <label for="review">Review:</label>
-        <textarea id="review" required></textarea>
+        <input type="number" id="rating" name="rating" min="1" max="5" required><br><br>
+        
+        <label for="review">Review:</label><br>
+        <textarea id="review" name="review" required></textarea><br><br>
+        
         <input type="submit" value="Submit">
     </form>
-    <div id="response"></div>
-
+    
     <script>
-        function submitForm(event) {
-            event.preventDefault();
-
-            var productLink = document.getElementById("product_link").value;
-            var rating = document.getElementById("rating").value;
-            var review = document.getElementById("review").value;
-
-            var responseText = "Thank you for your " + rating + "-star review. We're glad to hear that you found the product " + review + "!";
-            document.getElementById("response").textContent = responseText;
-        }
+        $(document).ready(function() {
+            $("#reviewForm").submit(function(event) {
+                event.preventDefault();
+                
+                var productLink = $("#productLink").val();
+                var rating = $("#rating").val();
+                var review = $("#review").val();
+                
+                var productLinkUrl = productLink + "?rating=" + rating + "&review=" + encodeURIComponent(productLink);
+                
+                window.open(productLinkUrl, "_blank");
+            });
+        });
     </script>
 </body>
 </html>
