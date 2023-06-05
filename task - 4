@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp Referral Request</title>
+</head>
+<body>
+    <h1>WhatsApp Referral Request</h1>
+    <form action="https://api.whatsapp.com/send" method="GET" target="_blank">
+        <label for="whatsappNumber">WhatsApp Number:</label>
+        <input type="text" id="whatsappNumber" name="phone" required><br><br>
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="text" required></textarea><br><br>
+        
+        <label for="link">Link:</label>
+        <input type="url" id="link" name="text" required><br><br>
+        
+        <input type="submit" value="Send Message">
+    </form>
+</body>
+</html>
